@@ -6,11 +6,25 @@ using System.Text;
 
 namespace GameSaleDemo.Business.Contrete
 {
-    public class UserManager : IUserService
+    class UserManager : IUserService
     {
-        public void Add( User user)
+        IUserValidationService _userValidationService;
+
+        public UserManager(IUserValidationService userValidationService)
         {
-            Console.WriteLine(user.FirstName +" "+ user.LastName + " user added");
+            _userValidationService = userValidationService;
+        }
+
+        public void Add(User user)
+        {
+            if (_userValidationService.Validate(user))
+            {
+                Console.WriteLine("User successfully added");
+            }
+            else
+            {
+                Console.WriteLine("User was not added");
+            }
         }
 
         public void Delete(User user)

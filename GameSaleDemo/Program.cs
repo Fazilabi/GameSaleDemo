@@ -1,4 +1,5 @@
-﻿using GameSaleDemo.Business.Contrete;
+﻿using GameSaleDemo.Business.Abstract;
+using GameSaleDemo.Business.Contrete;
 using GameSaleDemo.Entity.Concrete;
 using System;
 
@@ -13,7 +14,7 @@ namespace GameSaleDemo
             Game game3 = new Game() {  GameName="FarCry", Id=3, CategoryId=2, Price=159.99};
 
 
-            User user1 = new User() {  Id=1, FirstName="Fazil", LastName="Gurban", NationalityId="251642136", DateOfBirth=new DateTime(1989,07,24)};
+            User user1 = new User() {  Id=1, FirstName="Fazil", LastName="Gurban", NationalityId="251642136", DateOfBirth=new DateTime(1989)};
             User user2 = new User() {  Id=2, FirstName="Murad", LastName="Ali", NationalityId="251642826", DateOfBirth=new DateTime(1992,05,05)};
             User user3 = new User() {  Id=3, FirstName = "Tural", LastName="Veli", NationalityId="251642951", DateOfBirth=new DateTime(1995,03,10)};
 
@@ -29,7 +30,8 @@ namespace GameSaleDemo
             //gameManager.Delete(game2);
             //gameManager.Update(game3);
             //Console.WriteLine("------------------------------");
-            UserManager userManager = new UserManager();
+            UserManager userManager = new UserManager(new UserValidationManager());
+            userManager.Add(user1);
             //userManager.Add(user1);
             //userManager.Add(user2);
             //userManager.Add(user3);
@@ -46,9 +48,9 @@ namespace GameSaleDemo
 
 
             OrderManager saleManager = new OrderManager();
-            saleManager.GameSale(game1, user2, campaign2);
-            saleManager.GameSale(game2, user1, campaign3);
-            saleManager.Add(game2, user1);
+            //saleManager.GameSale(game1, user2, campaign2);
+            //saleManager.GameSale(game2, user1, campaign3);
+            //saleManager.Add(game2, user1);
 
 
         }
